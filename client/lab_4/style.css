@@ -46,7 +46,7 @@ h2 {
 }
 
 form {
-  accent-color: hsla(239, 56%, 36%, 0.482);
+  accent-color: hsla(120, 100%, 50%, 0.482);
 }
 
 /*
@@ -92,8 +92,8 @@ form {
   /* this will push other blocks out of the way */
 
   /* colors */
-  background-color: #3a54e3;
-  color: #305996;
+  background-color: #ffe08a;
+  color: #4a4a4a;
 
   /* shapes */
   border-radius: 6px;
@@ -111,12 +111,13 @@ form {
   Rules can be combined on a block to apply the 'cascade' in order
   So you can use two classnames in a single class attribute
   like: <div class="box section">
+
   Rules may combine in unexpected ways - remember that the LAST thing written in this file will have "priority"
   And will be what displays in your client
 */
 
 .box {
-  background-color: rgba(56, 41, 223, 0.4);
+  background-color: rgba(239, 239, 239, 0.40);
   border: 2px dashed;
   border-radius: 4px;
 
@@ -127,14 +128,14 @@ form {
 }
 
 .left_section {
-  background-color: rgba(40, 79, 186, 0.8);
+  background-color: rgba(0, 139, 139, 0.8);
   flex: 0 1 auto;
   margin: 1rem;
   padding: 1.5rem;
 }
 
 .right_section {
-  background-color: rgba(26, 78, 201, 0.7);
+  background-color: rgba(255, 224, 138, 0.7);
   flex: 1 2 auto;
   margin: 1rem;
   align-items: center;
@@ -150,13 +151,13 @@ form {
 .footer {
   flex-shrink: 0;
   padding: 1rem;
-  background-color: rgba(41, 64, 217, 0.8);
+  background-color: rgba(0, 139, 139, 0.8);
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .footer a {
-  color: rgba(30, 90, 120, 0);
+  color: rgba(255, 224, 138, 1);
   text-decoration: underline;
 }
 
@@ -174,7 +175,7 @@ form {
 }
 
 .subtitle {
-  color: rgba(55, 61, 250, 0.8);
+  color: rgba(0, 0, 0, 0.8);
   margin: 0px;
   margin-bottom: 5px;
 }
@@ -232,13 +233,13 @@ div.carousel {
     means annoying pop-ins won't happen
     but it also means you need to format your images to be compatible
     or they will stretch weird
+
     - try a tall one and see what happens
     - change the height on a fixed image size and see what happens
     - now make sure that images are _always_ square
     - ... there's a reason crop tools are popular in image editors
    */
-  width: 150px;
-  height: 100px; 
+  width: 150px; 
 }
 
 .prev,
@@ -262,17 +263,45 @@ div.carousel {
 
 .prev:hover,
 .next:hover {
-  background-color: rgb(246, 169, 93);
   /* Pick a good background colour for your hover pseudoclass */
 }
+
 
 
 /*
 Form Styles
 */
 
-
 form input {
     /* This is a hack to make sure our boxes line up with one another nicely */
     width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+
+    /* here we are setting white space correctly */
+    margin-bottom: 1rem;
+    height: 2rem;
+    border-radius: 4px;
+  }
+
+  form label {
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+    align-items: flex-start;
+
+    display: block; /* this turns the label text into a box we can set margins on */
+    margin-bottom: 0.5rem;
+  }
+
+/* How To Write A Media Query For Small Screens */
+
+@media only screen and (max-width: 736px){
+    /* Rules in here will only apply when a screen is the correct size */
+    /* check it out by using your developer tools to shrink your screen-size */
+    .container {
+      background-color: rgba(204, 8, 162, 0.65);
+    }
 }
