@@ -31,15 +31,28 @@
             <button class="prev">prev</button>
             <div class="slides">
                 
-                    <div class="carousel_item"><img id="slide_1" src="images/image1.jpg" alt="nature 1" /></div>
-                    <div class="carousel_item"><img id="slide_1" src="images/image4.jpg" alt="nature 2" /></div>
-                    <div class="carousel_item"><img id="slide_1" src="images/image3.jpg" alt="nature 3" /></div>
-                    <div class="carousel_item"><img id="slide_1" src="images/image2.jpg" alt="nature 4" /></div>
+                div class="carousel">
+                <div class="carousel__item carousel__item--visible">
+                    <img src="images/one.svg" />
+                </div>
+                <div class="carousel__item">
+                    <img src="images/two.svg" />
+                </div>
+                <div class="carousel__item">
+                    <img src="images/three.svg" />
+                </div>
+                <div class="carousel__item">
+                    <img src="images/four.svg" />
+                </div>
+                <div class="carousel__item">
+                    <img src="images/five.svg" />
                 </div>
 
-        </div>
-        <button class="next">next</button>
-    </div>
+                <div class="carousel__actions">
+                    <button id="carousel__button--next" aria-label="Next slide">Next</button>
+                    <button id="carousel__button--prev" aria-label="Previous slide">Prev</button>
+                </div>
+            </div>
         <div class="box">
           <!--description box-->
           Description of the images above
