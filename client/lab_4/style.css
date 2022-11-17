@@ -46,7 +46,7 @@ h2 {
 }
 
 form {
-  accent-color: hsla(120, 100%, 50%, 0.482);
+  accent-color: hsla(239, 56%, 36%, 0.482);
 }
 
 /*
@@ -150,13 +150,13 @@ form {
 .footer {
   flex-shrink: 0;
   padding: 1rem;
-  background-color: rgba(0, 139, 12, 0.8);
+  background-color: rgba(86, 13, 175, 0.8);
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .footer a {
-  color: rgb(187, 138, 255);
+  color: rgba(30, 90, 120, 0);
   text-decoration: underline;
 }
 
