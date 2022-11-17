@@ -1,5 +1,42 @@
-<!-- Bring in your successful HTML/CSS from the Flexbox lab -->
-<!-- Your page will need a form in it with an 'action' to /api and a single text field with an id/name of "resto" -->
-<!-- If you open /routes/apiRoutes and go to line 38 you will find the server side answer to your request! -->
-
-<!-- Temporarily unhook your script.js file from your main index file -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lab_5</title>
+</head>
+<body> 
+       <!-- Whole page in wrapper class -->
+    <div class="wrapper">
+        <!-- header -->
+        <header class="header green thickBox">
+            <h1>Comfort Jato's Lab</h1>
+        </header>
+        <div class="container">
+            <!-- LEft section of the box -->
+            <div class="left_section box orange">
+                <h1>Form Inputs</h1>
+                <form action="/api" class="box">
+                <form action="/api" class="box main_form">
+                    <p>Restaurant Name:</p>
+                    <label for="resto"></label>
+                    <input type="text" name="resto" id="resto"/>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <!-- Right section of the box -->
+            <div class="right_section box orange">
+                <h1>Local Restaurants</h1>
+                <div class="box">
+                    <p>A list of restaurants from an API</p>
+                </div>
+            </div>
+        </div>
+        
+    
+        <!--Footer of the page-->
+        <footer class="footer green thickBox">
+            <p>Cjato5 <a href="https://github.com/cjato5/INST377-Lab-Work" >Comfort Jato Lab</a></p>
+        </footer>
+    </div>
