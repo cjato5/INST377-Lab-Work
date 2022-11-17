@@ -299,6 +299,9 @@ form input {
 /* How To Write A Media Query For Small Screens */
 
 @media only screen and (max-width: 736px){
+  .left, .main, .right {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
     /* Rules in here will only apply when a screen is the correct size */
     /* check it out by using your developer tools to shrink your screen-size */
     .container {
