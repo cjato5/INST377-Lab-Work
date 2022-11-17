@@ -92,7 +92,7 @@ form {
   /* this will push other blocks out of the way */
 
   /* colors */
-  background-color: #000000;
+  background-color: #3a54e3;
   color: #305996;
 
   /* shapes */
@@ -174,7 +174,7 @@ form {
 }
 
 .subtitle {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(55, 61, 250, 0.8);
   margin: 0px;
   margin-bottom: 5px;
 }
