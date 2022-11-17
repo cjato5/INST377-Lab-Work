@@ -46,7 +46,7 @@ h2 {
 }
 
 form {
-  accent-color: hsla(263, 100%, 50%, 0.482);
+  accent-color: hsla(120, 100%, 50%, 0.482);
 }
 
 /*
@@ -92,8 +92,8 @@ form {
   /* this will push other blocks out of the way */
 
   /* colors */
-  background-color: #ff8ace;
-  color: #e3cc1b;
+  background-color: #031754;
+  color: #101c17;
 
   /* shapes */
   border-radius: 6px;
@@ -116,7 +116,7 @@ form {
 */
 
 .box {
-  background-color: rgba(239, 239, 239, 0.40);
+  background-color: rgba(56, 41, 223, 0.4);
   border: 2px dashed;
   border-radius: 4px;
 
@@ -150,13 +150,13 @@ form {
 .footer {
   flex-shrink: 0;
   padding: 1rem;
-  background-color: rgba(0, 139, 139, 0.8);
+  background-color: rgba(0, 139, 12, 0.8);
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .footer a {
-  color: rgba(255, 224, 138, 1);
+  color: rgb(187, 138, 255);
   text-decoration: underline;
 }
 
@@ -274,5 +274,5 @@ Form Styles
 
 form input {
     /* This is a hack to make sure our boxes line up with one another nicely */
-    width:auto;
+    width: 100%;
 }
