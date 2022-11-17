@@ -46,7 +46,7 @@ h2 {
 }
 
 form {
-  accent-color: hsla(120, 100%, 50%, 0.482);
+  accent-color: hsla(263, 100%, 50%, 0.482);
 }
 
 /*
@@ -92,8 +92,8 @@ form {
   /* this will push other blocks out of the way */
 
   /* colors */
-  background-color: #ffe08a;
-  color: #4a4a4a;
+  background-color: #ff8ace;
+  color: #e3cc1b;
 
   /* shapes */
   border-radius: 6px;
@@ -274,5 +274,5 @@ Form Styles
 
 form input {
     /* This is a hack to make sure our boxes line up with one another nicely */
-    width:100%;
+    width:auto;
 }
