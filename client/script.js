@@ -1,141 +1,157 @@
-const targetList = document.querySelector("tbody");
-const targetBox = document.querySelector(".tile");
-
-async function populateMacros() {
-  const customRequest = await fetch("/api/table/data");
-  const macrosData = await customRequest.json();
-
-  macrosData.forEach((meal) => {
-    const appendItem = document.createElement("tr");
-    appendItem.innerHTML = `
-    <th>${meal["meal_id"]}</th>
-    <td>${meal["meal_name"]}</td>
-    <td>${meal["calories"]}</td>
-    <td>${meal["carbs"]}g</td>
-    <td>${meal["sodium"]}mg</td>
-    <td>${meal["protein"]}g</td>
-    <td>${meal["fat"]}g</td>
-    <td>${meal["cholesterol"]}mg</td>`;
-    targetList.append(appendItem);
-  });
-}
-
-//  This function fetches all dining halls and then populates the neraby restaurants on the home page
-async function populateRestaurants() {
-  const diningRequest = await fetch("/api/dining");
-  const diningData = await diningRequest.json();
-
-  diningData["data"].forEach((restaurant) => {
-    const appendItem = document.createElement("div");
-    appendItem.classList.add("tile", "has-text-centered", "is-parent", "is-3");
-    appendItem.innerHTML = `
-    <article class="tile is-child box has-background-link-dark ">
-    <span class="subtitle has-text-light has-text-weight-bold">${
-      restaurant["hall_name"]
-    }</span>
-    <br />
-    <span class="has-text-light">${
-      restaurant["hall_address"].split(",")[0]
-    }</span>
-    <br/>
-    <span class="has-text-light">${
-      restaurant["hall_address"].split(",")[1]
-    }</span>
-    </article>`;
-    targetBox.append(appendItem);
-  });
-}
 /* eslint-disable max-len */
-function mapScript() {
-  const mymap = L.map("mapid").setView([38.988751, -76.94774], 14);
-
-  L.tileLayer(
-    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-    {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: "mapbox/streets-v11",
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken:
-        "pk.eyJ1IjoiYWxlaXRjaDEtdW1kLWVkdSIsImEiOiJjazhpdTF3Y28wYTIzM2twNnAxc2g2N2tnIn0.I1tMmZhRRNRt3LF7QnnB4g",
+/*
+  Hook this script to index.html
+  by adding `<script src="script.js">` just before your closing `</body>` tag
+*/
+/*
+  ## Utility Functions
+    Under this comment place any utility functions you need - like an inclusive random number selector
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+*/
+function getRandomIntInclusive(min, max) {
+  const Newmin = Math.ceil(min);
+  const Newmax = Math.floor(max);
+  return Math.floor(Math.random() * (Newmax - Newmin + 1) + Newmin); // The maximum is inclusive and the minimum is inclusive
+}
+function injectHTML(list) {
+  console.log('fired injectHTML');
+  const target = document.querySelector('#restaurant_list');
+  target.innerHTML = '';
+  const listEl = document.createElement('ol');
+  target.appendChild(listEl);
+  list.forEach((item) => {
+    const el = document.createElement('li');
+    el.innerText = item.name;
+    listEl.appendChild(el);
+  });
+  /*
+      ## JS and HTML Injection
+        There are a bunch of methods to inject text or HTML into a document using JS
+        Mainly, they're considered "unsafe" because they can spoof a page pretty easily
+        But they're useful for starting to understand how websites work
+        the usual ones are element.innerText and element.innerHTML
+        Here's an article on the differences if you want to know more:
+        https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent#differences_from_innertext
+      ## What to do in this function
+        - Accept a list of restaurant objects
+        - using a .forEach method, inject a list element into your index.html for every element in the list
+        - Display the name of that restaurant and what category of food it is
+    */
+}
+function processRestaurants(list) {
+  console.log('fired restaurants list');
+  const range = [...Array(15).keys()];
+  const newArray = range.map((item) => {
+    const index = getRandomIntInclusive(0, list.length);
+    return list[index];
+  });
+  return newArray;
+  /*
+        ## Process Data Separately From Injecting It
+          This function should accept your 1,000 records
+          then select 15 random records
+          and return an object containing only the restaurant's name, category, and geocoded location
+          So we can inject them using the HTML injection function
+          You can find the column names by carefully looking at your single returned record
+          https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz
+        ## What to do in this function:
+        - Create an array of 15 empty elements (there are a lot of fun ways to do this, and also very basic ways)
+        - using a .map function on that range,
+        - Make a list of 15 random restaurants from your list of 100 from your data request
+        - Return only their name, category, and location
+        - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
+      */
+}
+function filterList(list, filterInputValue) {
+  return list.filter((item) => {
+    if (!item.name) {
+      return;
     }
-  ).addTo(mymap);
-  return mymap;
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = filterInputValue.toLowerCase();
+    return lowerCaseName.includes(lowerCaseQuery);
+  });
 }
 
-async function dataFilter(mapFromMapFunction) {
-  const form = document.querySelector("#search-form");
-  const search = document.querySelector("#search");
-  const targetList = document.querySelector(".target-list");
-  const replyMessage = document.querySelector(".reply-message");
+function initMap() {
+  console.log('initMap');
+  const map = L.map('map').setView([38.9897, -76.9378], 13);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  return map;
+}
 
-  const request = await fetch("/api/map/data");
-  const data = await request.json();
+function markerPlace(array, map) {
+  console.log('markerPlace', array);
+  const marker = L.marker([51.5, -0.09]).addTo(map);
+}
+async function mainEvent() {
+  /*
+        ## Main Event
+          Separating your main programming from your side functions will help you organize your thoughts
+          When you're not working in a heavily-commented "learning" file, this also is more legible
+          If you separate your work, when one piece is complete, you can save it and trust it
+      */
 
-  // this code fires when our form submits
-  // it filters our data list and returns it to the HTML
-  form.addEventListener("submit", async (event) => {
-    targetList.innerText = "";
-
-    event.preventDefault();
-    console.log("submit fired", search.value);
-    // eslint-disable-next-line max-len
-    // make sure each returned restaurant _can_ be plotted on the map by checking for the value we need
-    const filtered = data.filter(
-      (record) =>
-        (record.meal_name.toUpperCase().includes(search.value.toUpperCase()) &&
-          record.hall_lat) ||
-        (record.hall_name.toUpperCase().includes(search.value.toUpperCase()) &&
-          record.hall_lat)
-    );
-    const topFive = filtered.slice(0, 5);
-
-    if (topFive.length < 1) {
-      replyMessage.classList.add("box");
-      replyMessage.innerText = "No matches found";
-    }
-
-    console.table(topFive);
-
-    topFive.forEach((item) => {
-      const Lat = item.hall_lat;
-      const Long = item.hall_long;
-      console.log("markerLongLat", Long, Lat);
-      const marker = L.marker([Lat, Long]).addTo(mapFromMapFunction);
-      const popup = L.popup()
-        .setLatLng([Lat, Long])
-        .setContent(`<p>${item.hall_name}</p>`)
-        .openOn(mapFromMapFunction);
-      marker.bindPopup(popup).openPopup();
-      mapFromMapFunction.addLayer(marker);
-      const appendItem = document.createElement("li");
-      appendItem.classList.add("block", "list-item");
-      appendItem.innerHTML = `<div class="block"><div class="list-header is-size-5">${item.meal_name}</div><address class="is-size-6">${item.hall_name}</address></div>`;
-      targetList.append(appendItem);
+  const pageMap = initMap();
+  // the async keyword means we can make API requests
+  const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
+  const submit = document.querySelector('#get-resto'); // get a reference to your submit button
+  const loadAnimation = document.querySelector('.lds-ellipsis');
+  submit.style.display = 'none'; // let your submit button disappear
+  /*
+        Let's get some data from the API - it will take a second or two to load
+        This next line goes to the request for 'GET' in the file at /server/routes/foodServiceRoutes.js
+        It's at about line 27 - go have a look and see what we're retrieving and sending back.
+       */
+  const results = await fetch('/api/foodServicePG');
+  const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
+  /*
+        Below this comment, we log out a table of all the results using "dot notation"
+        An alternate notation would be "bracket notation" - arrayFromJson["data"]
+        Dot notation is preferred in JS unless you have a good reason to use brackets
+        The 'data' key, which we set at line 38 in foodServiceRoutes.js, contains all 1,000 records we need
+      */
+  console.table(arrayFromJson.data);
+  // in your browser console, try expanding this object to see what fields are available to work with
+  // for example: arrayFromJson.data[0].name, etc
+  console.log(arrayFromJson.data[0]);
+  // this is called "string interpolation" and is how we build large text blocks with variables
+  console.log(
+    `${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`
+  );
+  // This IF statement ensures we can't do anything if we don't have information yet
+  if (arrayFromJson.data?.length > 0) {
+    // the question mark in this means "if this is set at all"
+    submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
+    loadAnimation.classList.remove('lds-ellipsis');
+    loadAnimation.classList.add('lds-ellipsis_hidden');
+    // And here's an eventListener! It's listening for a "submit" button specifically being clicked
+    // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
+    let currentList = [];
+    form.addEventListener('input', (event) => {
+      console.log(event.target.value);
+      const filteredList = filterList(currentList, event.target.value);
+      injectHTML(filteredList);
     });
-    const Lat = topFive[0]?.hall_lat;
-    const Long = topFive[0]?.hall_long;
-    console.log("viewSet coords", Lat, Long);
-    mapFromMapFunction.panTo([Lat, Long], 0);
-  });
-
-  // this listens for typing into our input box
-  search.addEventListener("input", (event) => {
-    console.log("input", event.target.value);
-    if (search.value.length === 0) {
-      // clear your "no matches found" code
-      targetList.innerText = "";
-    }
-  });
+    form.addEventListener('submit', (submitEvent) => {
+      // This is needed to stop our page from changing to a new URL even though it heard a GET request
+      submitEvent.preventDefault();
+      // This constant will have the value of your 15-restaurant collection when it processes
+      currentList = processRestaurants(arrayFromJson.data);
+      // And this function call will perform the "side effect" of injecting the HTML list for you
+      injectHTML(currentList);
+      // By separating the functions, we open the possibility of regenerating the list
+      // without having to retrieve fresh data every time
+      // We also have access to some form values, so we could filter the list based on name
+    });
+  }
 }
-
-async function windowActions() {
-  populateMacros();
-  populateRestaurants();
-  const mapObject = mapScript(); // Load your map
-  await dataFilter(mapObject); // load your food data
-}
-
-window.onload = windowActions;
+/*
+      This last line actually runs first!
+      It's calling the 'mainEvent' function at line 57
+      It runs first because the listener is set to when your HTML content has loaded
+    */
+document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API requests
