@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lab_7</title>
+</head>
+<body> 
+       <!-- Whole page in wrapper class -->
+    <div class="wrapper">
+        <!-- header -->
+        <header class="header green thickBox">
+            <h1>Comfort Jato Lab</h1>
+        </header>
+        <div class="container">
+            <!-- LEft section of the box -->
+            <div class="left_section box orange">
+                <h1>Form Inputs</h1>
+                <form action="/api" class="box main_form">
+                    <p>Restaurant Name:</p>
+                    <label for="resto"></label>
+                    <input type="text" name="resto" id="resto"/>
+                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    <button type="submit" id="get-resto">Submit</button>
+                </form>
+            </div>
+            <!-- Right section of the box -->
+            <div class="right_section box orange">
+                <h1>Local Restaurants</h1>
+                <div class="box" id="restaurant_list">
+                    <p>A list of restaurants from an API</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--Footer of the page-->
+        <footer class="footer">
+            <p>Cjato5 <a href="https://github.com/cjato5/INST377-Lab-Work" >Comfort Jato Lab</a></p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
