@@ -270,19 +270,6 @@
     /* Pick a good background colour for your hover pseudoclass */
     }
 
-      /* MAP STYLES */
-
-      #map {
-        display: block;
-        width: 400px;
-        height: 300px;
-        border: 2px dashed rgb(99,99,99);
-        margin-bottom: 1rem;
-      }
-  
-      /*
-      Form Styles
-
 
     /*
     Form Styles
